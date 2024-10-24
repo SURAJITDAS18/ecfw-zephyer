@@ -51,4 +51,21 @@ uint8_t get_fab_id(void);
  */
 uint16_t get_platform_id(void);
 
+/**
+ * @brief Check status for device drivers required.
+ *
+ * @retval indicate if all required device drivers are correctly initialized or not.
+ *
+ * Note: List is generated from device tree entries.
+ */
+int board_devices_check(void);
+
+/**
+ * @brief Apply board/app specific pinctrl changes via zephyr, user device tree node
+ *
+ * @retval indicate if pin control/muxing from device tree was applied successfully.
+ *
+ */
+int board_dts_pin_muxing(void);
+
 #endif /* BOARD_H */

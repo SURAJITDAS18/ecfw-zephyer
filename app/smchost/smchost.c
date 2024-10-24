@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include "board.h"
 #include "board_config.h"
@@ -599,6 +600,9 @@ static uint8_t smchost_req_length(uint8_t command)
 
 	case SMCHOST_ACPI_WRITE:
 	case SMCHOST_WRITE_ACPI_SPACE:
+#ifdef CONFIG_THERMAL_MANAGEMENT
+	case SMCHOST_SET_OS_ACTIVE_TRIP:
+#endif
 		return 2;
 
 	default:

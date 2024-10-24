@@ -33,11 +33,11 @@
 		compatible = "pwm-leds";
 
 		pwm_led8: pwm_led8 {
-			pwms = <&pwm8 0 0>;
+			pwms = <&pwm8 0 0 0>;
 		};
 
 		pwm_led6: pwm_led6 {
-			pwms = <&pwm6 1 0>;
+			pwms = <&pwm6 1 0 0>;
 		};
 	};
 
@@ -48,10 +48,21 @@
 			min-residency-us = <100000>;
 		};
 	};
+
+	zephyr,user {
+		/* Set as GPIos. These are not in GPIO mode due to HW default or ROM */
+		pinctrl-0 = < &gpio000_gpio000 &gpio161_gpio161 &gpio162_gpio162 &gpio163_gpio163
+				&gpio172_gpio172 &gpio250_gpio250 &gpio253_gpio253>;
+		pinctrl-names = "default";
+	};
 };
 
 &cpu0 {
 	cpu-power-states = <&suspend_to_ram>;
+};
+
+&pcr {
+	status = "okay";
 };
 
 &uart2 {
@@ -102,6 +113,18 @@
 	};
 };
 
+&i2c00_scl_gpio004 {
+	drive-open-drain;
+	output-enable;
+	output-high;
+};
+
+&i2c00_sda_gpio003 {
+	drive-open-drain;
+	output-enable;
+	output-high;
+};
+
 &i2c_smb_1 {
 	status = "okay";
 	port_sel = <1>;
@@ -109,6 +132,18 @@
 	scl-gpios = <&gpio_100_136 25 0>;
 	pinctrl-0 = < &i2c01_scl_gpio131 &i2c01_sda_gpio130 >;
 	pinctrl-names = "default";
+};
+
+&i2c01_scl_gpio131 {
+	drive-open-drain;
+	output-enable;
+	output-high;
+};
+
+&i2c01_sda_gpio130 {
+	drive-open-drain;
+	output-enable;
+	output-high;
 };
 
 &espi0 {
@@ -128,6 +163,10 @@
 };
 
 &spi0 {
+	status = "okay";
+	lines = <4>;
+	port_sel = <0>;
+	chip_select = <0>;
 	pinctrl-0 = < &shd_cs0_n_gpio055 &shd_clk_gpio056
 			&shd_io0_gpio223 &shd_io1_gpio224
 			&shd_io2_gpio227 &shd_io3_gpio016 >;

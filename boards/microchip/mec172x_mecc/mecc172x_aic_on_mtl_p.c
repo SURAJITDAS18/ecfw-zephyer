@@ -36,8 +36,6 @@ uint8_t pd_i2c_addr_set;
 struct gpio_ec_config mecc172x_cfg[] =  {
 /*      Port Signal			Config       */
 	{ PROCHOT,			GPIO_OUTPUT_LOW },
-	{ RSMRST_PWRGD_G3SAF_P,		GPIO_INPUT },
-	{ RSMRST_PWRGD_MAF_P,		GPIO_INPUT },
 	{ PM_PWRBTN,			GPIO_OUTPUT_HIGH | GPIO_OPEN_DRAIN },
 	{ PM_SLP_SUS,			GPIO_INPUT },
 	{ VOL_UP,			GPIO_INPUT | GPIO_INT_EDGE_BOTH },
@@ -62,6 +60,7 @@ struct gpio_ec_config mecc172x_cfg[] =  {
 	{ STD_ADP_PRSNT,		GPIO_INPUT },
 	{ PM_BAT_STATUS_LED1,		GPIO_OUTPUT_LOW },
 	{ TYPEC_EC_SMBUS_ALERT_0_R,	GPIO_INPUT | GPIO_INT_EDGE_FALLING },
+	{ EC_SLATEMODE_HALLOUT_SNSR_R,	GPIO_INPUT | GPIO_INT_EDGE_BOTH },
 };
 
 /* Any IO expanders pins should be defined here */

@@ -29,6 +29,11 @@
 
 	};
 
+	zephyr,user {
+		/* Set as GPIos. These are not in GPIO mode due to HW default or ROM */
+		pinctrl-0 = < &gpio000_gpio000 &gpio161_gpio161 &gpio162_gpio162>;
+		pinctrl-names = "default";
+	};
 };
 
 &cpu0 {
@@ -145,11 +150,13 @@
 
 &i2c00_scl_gpio004 {
 	drive-open-drain;
+	output-enable;
 	output-high;
 };
 
 &i2c00_sda_gpio003 {
 	drive-open-drain;
+	output-enable;
 	output-high;
 };
 
@@ -162,11 +169,13 @@
 
 &i2c06_scl_gpio140 {
 	drive-open-drain;
+	output-enable;
 	output-high;
 };
 
 &i2c06_sda_gpio132 {
 	drive-open-drain;
+	output-enable;
 	output-high;
 };
 
@@ -179,11 +188,13 @@
 
 &i2c05_scl_gpio142 {
 	drive-open-drain;
+	output-enable;
 	output-high;
 };
 
 &i2c05_sda_gpio141 {
 	drive-open-drain;
+	output-enable;
 	output-high;
 };
 
@@ -197,20 +208,22 @@
 
 &i2c08_scl_gpio230 {
 	output-high;
+	output-enable;
 	drive-open-drain;
 };
 
 &i2c08_sda_gpio231 {
 	output-high;
+	output-enable;
 	drive-open-drain;
 };
 
 &spi0 {
 	status = "okay";
+	compatible = "microchip,xec-qmspi-ldma";
 	clock-frequency = <4000000>;
 	lines = <4>;
-	chip_select = <0>;
-	port_sel = <0>; /* Shared SPI */
+	chip-select = <0>;
 
 	pinctrl-0 = < &shd_cs0_n_gpio055
 		      &shd_clk_gpio056
